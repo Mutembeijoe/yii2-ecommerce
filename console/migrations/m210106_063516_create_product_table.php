@@ -25,8 +25,8 @@ class m210106_063516_create_product_table extends Migration
             'status' => $this->tinyInteger(2),
             'created_at' => $this->integer(11),
             'updated_at' => $this->integer(11),
-            'created_by' => $this->integer(11)->notNull(),
-            'updated_by' => $this->integer(11)->notNull(),
+            'created_by' => $this->integer(11),
+            'updated_by' => $this->integer(11),
         ]);
 
         // creates index for column `created_by`
