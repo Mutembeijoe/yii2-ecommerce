@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $firstname
  * @property string $lastname
+ * @property UserAddress[] $addresses
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
@@ -30,6 +31,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+
+    public $oldPassword;
+    public $newPassword;
 
     /**
      * {@inheritdoc}
@@ -211,4 +215,16 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+    /**
+     * Gets query for [[UserAddresses]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\UserAddressQuery[]
+     */
+    public function getAddresses()
+    {
+        return $this->hasMany(UserAddress::class, ['user_id' => 'id']);
+    }
+
 }

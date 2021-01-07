@@ -44,12 +44,15 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Logout(' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],
-            'linkOptions' => [
-                'class' => 'nav-link',
-                'data-method' => 'post'
-                ,
-            ]
+        $menuItems[] = [
+            'label' => Yii::$app->user->identity->username,
+            'items' => [
+                ['label' => 'profile', 'url' => ['/profile/index']],
+                ['label' => 'logout', 'url' => ['/site/logout'], 'linkOptions' => [
+                    'data-method' => 'post',
+                ]
+                ],
+            ],
         ];
     }
     echo \yii\bootstrap4\Nav::widget([
