@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
+use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -168,6 +169,10 @@ class Product extends \yii\db\ActiveRecord
 
     public function getImageUrl(){
         return Yii::$app->params['@frontend'] .'/uploads'. $this->image;
+    }
+
+    public function getSummaryDesc(){
+        return StringHelper::truncateWords( strip_tags($this->description), 10);
     }
 
 }
