@@ -9,8 +9,6 @@ use \yii\widgets\ListView;
 
 $this->title = 'My Yii Application';
 ?>
-
-
 <div class="row">
     <div class="col-lg-9 m-auto">
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">

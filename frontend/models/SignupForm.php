@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\models;
 
 use Yii;
@@ -12,6 +13,8 @@ class SignupForm extends Model
 {
     public $username;
     public $email;
+    public $firstname;
+    public $lastname;
     public $password;
 
 
@@ -34,6 +37,12 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['firstname', 'required'],
+            ['firstname', 'string', 'min' => 3, 'max' => 255],
+
+            ['lastname', 'required'],
+            ['lastname', 'string', 'min' => 3, 'max' => 255],
         ];
     }
 
@@ -47,9 +56,11 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
+        $user->firstname = $this->firstname;
+        $user->lastname = $this->lastname;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
