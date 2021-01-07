@@ -147,18 +147,27 @@ class Product extends \yii\db\ActiveRecord
         }
 
         $transaction = Yii::$app->db->beginTransaction();
+
         $ok = parent::save($runValidation, $attributeNames);
-        if (!$ok) {
+
+        if(!$ok){
             $transaction->rollBack();
-            return $ok;
-        } else {
+        }
+
+        if ($ok && $this->imageFile) {
             $fullPath = Yii::getAlias('@frontend/web/uploads/') . $this->image;
             FileHelper::createDirectory(dirname($fullPath));
             var_dump($fullPath);
             $this->imageFile->saveAs($fullPath);
-            $transaction->commit();
         }
+
+
+        $transaction->commit();
         return $ok;
+    }
+
+    public function getImageUrl(){
+        return Yii::$app->params['@frontend'] .'/uploads'. $this->image;
     }
 
 }

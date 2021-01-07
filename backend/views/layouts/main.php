@@ -64,7 +64,7 @@ AppAsset::register($this);
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= Url::to(['/product/index']) ?> ">View</a>
+                    <a class="collapse-item" href="<?= Url::to(['/product/index']) ?> ">List</a>
                     <a class="collapse-item" href="<?= Url::to(['/product/create']) ?> ">Create</a>
                 </div>
             </div>
@@ -81,10 +81,10 @@ AppAsset::register($this);
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                    <a class="collapse-item" href="/utilities-color.html">Colors</a>
+                    <a class="collapse-item" href="/utilities-border.html">Borders</a>
+                    <a class="collapse-item" href="/utilities-animation.html">Animations</a>
+                    <a class="collapse-item" href="/utilities-other.html">Other</a>
                 </div>
             </div>
         </li>
@@ -221,7 +221,7 @@ AppAsset::register($this);
                             </h6>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                    <img class="rounded-circle" src="/img/undraw_profile_1.svg"
                                          alt="">
                                     <div class="status-indicator bg-success"></div>
                                 </div>
@@ -234,7 +234,7 @@ AppAsset::register($this);
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                    <img class="rounded-circle" src="/img/undraw_profile_2.svg"
                                          alt="">
                                     <div class="status-indicator"></div>
                                 </div>
@@ -247,7 +247,7 @@ AppAsset::register($this);
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                    <img class="rounded-circle" src="/img/undraw_profile_3.svg"
                                          alt="">
                                     <div class="status-indicator bg-warning"></div>
                                 </div>
@@ -283,7 +283,7 @@ AppAsset::register($this);
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= Yii::$app->user->identity->username?></span>
                             <img class="img-profile rounded-circle"
-                                 src="img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
