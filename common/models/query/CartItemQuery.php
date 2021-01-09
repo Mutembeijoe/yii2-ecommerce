@@ -2,12 +2,14 @@
 
 namespace common\models\query;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[\common\models\CartItem]].
  *
  * @see \common\models\CartItem
  */
-class CartItemQuery extends \yii\db\ActiveQuery
+class CartItemQuery extends ActiveQuery
 {
     /*public function active()
     {
@@ -37,11 +39,10 @@ class CartItemQuery extends \yii\db\ActiveQuery
         return $this->andWhere(['created_by' => $userId]);
     }
 
-//    public function joinWithProductTable(): CartItemQuery
-//    {
-//        return $this->join('LEFT JOIN', 'product p', 'p.id = ');
-////        leftJoin('{{%product}}', ['product_id' => 'id']);
-//    }
+    public function joinWithProductTable(): CartItemQuery
+    {
+        return $this->with('product');
+    }
 
     public function withProductId($id): CartItemQuery
     {

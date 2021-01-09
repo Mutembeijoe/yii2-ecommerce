@@ -4,10 +4,11 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use frontend\base\BaseController;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 
-class ProfileController extends \yii\web\Controller
+class ProfileController extends BaseController
 {
     public function behaviors()
     {

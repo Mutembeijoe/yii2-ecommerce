@@ -4,13 +4,15 @@
 
 /* @var $content string */
 
+use yii\bootstrap4\Alert;
+use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use \yii\bootstrap4\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
+$cartItemsCount = $this->params["cartItemsCount"];
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -36,7 +38,14 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Cart', 'url' => ['/cart/index']],
+        [
+            'label' => 'Cart<span id="cartItemCount" class="badge badge-success m-1">' . $cartItemsCount . '</span> ',
+            'url' => ['/cart/index'],
+            'encode' => false,
+            'linkOptions' => [
+                "class" => 'd-flex justify-content-center align-items-center'
+            ]
+        ]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -53,7 +62,7 @@ AppAsset::register($this);
             ],
         ];
     }
-    echo \yii\bootstrap4\Nav::widget([
+    echo Nav::widget([
         'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => $menuItems,
     ]);
@@ -61,10 +70,20 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?= \yii\bootstrap4\Breadcrumbs::widget([
+        <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+
+<!--        --><?php //if (Yii::$app->session->hasFlash("success") || Yii::$app->session->hasFlash("fail")) { ?>
+<!--        --><?//= Alert::widget([
+//                'options' => ['class' => 'alert-info', 'style' => 'top:200px; z-index :10000'],
+//                'body' => Yii::$app->session->getFlash($cartItemsCount)
+//            ]
+//        )
+//
+//                <?php }   ?>
+
+
         <?= $content ?>
     </div>
 </div>
