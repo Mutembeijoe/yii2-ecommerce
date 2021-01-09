@@ -10,6 +10,8 @@ use Yii;
 
 class CartService
 {
+    const CART_SESSION_KEY = 'cart';
+
 
     public function getItemsInCartCount($userId)
     {
@@ -22,7 +24,6 @@ class CartService
         } else {
             $count = CartItem::find()->createdByUser($userId)->sum("quantity");
         }
-
         return $count;
     }
 
@@ -32,17 +33,17 @@ class CartService
         /**@var $product Product */
         if (Yii::$app->user->isGuest) {
             $session = Yii::$app->session;
-            $cart = $session->get("cart");
+            $cart = $session->get(self::CART_SESSION_KEY );
             if ($cart && isset($cart[$product->id])) {
                 $cart[$product->id]["quantity"] += 1;
-                $session->set("cart", $cart);
+                $session->set(self::CART_SESSION_KEY, $cart);
             } else {
                 $cartItem["quantity"] = 1;
                 $cartItem["name"] = $product->name;
                 $cartItem["price"] = $product->price;
                 $cartItem["image"] = $product->image;
                 $cart[$product->id] = $cartItem;
-                $session->set("cart", $cart);
+                $session->set(self::CART_SESSION_KEY, $cart);
             }
             return true;
         }
@@ -66,7 +67,7 @@ class CartService
         $user = Yii::$app->user;
         $cartItems = [];
         if ($user->isGuest) {
-            $cart = Yii::$app->session->get("cart", []);
+            $cart = Yii::$app->session->get(self::CART_SESSION_KEY, []);
             foreach ($cart as $key => $value) {
                 $value["product_id"] = $key;
                 $cartItems[] = $value;
@@ -87,4 +88,19 @@ class CartService
     }
 
 
+    public function removeItemFromCart($productId){
+        $user = Yii::$app->user;
+        if ($user->isGuest) {
+            $session = Yii::$app->session;
+            $cart = $session->get(self::CART_SESSION_KEY );
+            if(isset($cart)){
+               unset($cart[$productId]);
+               $session->set(self::CART_SESSION_KEY, $cart);
+
+            }
+        }else{
+             CartItem::deleteAll(["created_by" => $user->id, 'product_id' => $productId]);
+
+        }
+    }
 }

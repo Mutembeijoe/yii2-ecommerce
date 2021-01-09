@@ -13,7 +13,6 @@ use yii\web\Response;
 
 class CartController extends BaseController
 {
-
     public function behaviors(): array
     {
         return [
@@ -61,5 +60,12 @@ class CartController extends BaseController
             'itemsCount' => $itemsCount,
             'code' => 200,
         ];
+    }
+
+    public function actionDelete($productId): Response
+    {
+        $cartService = new CartService();
+        $cartService->removeItemFromCart($productId);
+        return $this->redirect(["index"]);
     }
 }
